@@ -141,6 +141,15 @@ public final class Board extends JPanel implements MouseListener, ActionListener
         return null;
     }
     
+    public Board(){
+        init();
+        DrawBoard();
+        board.addMouseListener(this);
+        board.setBackground(Color.WHITE);
+        board.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        board.setVisible(true);
+    }
+    
     public void CheckLocalKing(String name) {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 9; j++) {
