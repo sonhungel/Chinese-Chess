@@ -77,7 +77,7 @@ public class ChineseChessLayout extends JFrame implements ActionListener {
             //new Board();
             System.out.println("Tapped button START");
         }
-        this.dispose();
+        //this.dispose();
     }
     
     public static void main(String[] args) {

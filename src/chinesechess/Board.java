@@ -9,31 +9,23 @@ package chinesechess;
  *
  * @author Sonhungel
  */
-
-
 import Piece.*;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Graphics;
-import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
-import java.awt.Insets;
-import java.awt.Label;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import org.w3c.dom.css.Counter;
+import javax.swing.JOptionPane;
 
 public final class Board extends JPanel implements MouseListener, ActionListener {
     
@@ -58,7 +50,6 @@ public final class Board extends JPanel implements MouseListener, ActionListener
     public int[] kingRed = {9, 4};  
     public int[] kingGreen = {0, 4};
     public static Piece[][] Pieces = new Piece[10][9];
-    public static ArrayList<Piece> APiece;
     
     public String Base_Source(String name) {
         return "./Image/" + name + ".gif";
@@ -78,8 +69,8 @@ public final class Board extends JPanel implements MouseListener, ActionListener
         Image img1 = Toolkit.getDefaultToolkit().getImage(Base_Source("board"));
         g.drawImage(img1, 0, 0 + 60, board);
         Image img2 = new_image("Choose");
-        Image img5 = new_image("player1");
-        Image img6 = new_image("player2");
+        Image img5 = new_image("GreenPlayer");
+        Image img6 = new_image("RedPlayer");
         Image img7 = new_image("dao");
         Image img8 = new_image("redturn");
         Image img9 = new_image("greenturn");
@@ -105,8 +96,57 @@ public final class Board extends JPanel implements MouseListener, ActionListener
         }
     }
 
+    // Initialize for all Chess Pieces
     public void init(){
-
+        Counter = 0;
+        turn = 1;
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 9; j++) {
+                Pieces[i][j] = null;
+            }
+        }
+        Pieces[0][0] = new Chariot("GChariot", 1, this);
+        Pieces[0][1] = new Horse("GHorse", 1, this);
+        Pieces[0][2] = new Elephant("GElephant", 1, this);
+        Pieces[0][3] = new Advisor("GAdvisor", 1, this);
+        Pieces[0][4] = new King("King_Green", 1, this);
+        Pieces[0][5] = new Advisor("GAdvisor", 1, this);
+        Pieces[0][6] = new Elephant("GElephant", 1, this);
+        Pieces[0][7] = new Horse("GHorse", 1, this);
+        Pieces[0][8] = new Chariot("GChariot", 1, this);
+        Pieces[2][1] = new Cannon("GCannon", 1, this);
+        Pieces[2][7] = new Cannon("GCannon", 1, this);
+        Pieces[3][0] = new Pawn("GPawn", 1, this);
+        Pieces[3][2] = new Pawn("GPawn", 1, this);
+        Pieces[3][4] = new Pawn("GPawn", 1, this);
+        Pieces[3][6] = new Pawn("GPawn", 1, this);
+        Pieces[3][8] = new Pawn("GPawn", 1, this);
+        
+        Pieces[9][0] = new Chariot("RChariot", 0, this);
+        Pieces[9][1] = new Horse("RHorse", 0, this);
+        Pieces[9][2] = new Elephant("RElephant", 0, this);
+        Pieces[9][3] = new Advisor("RAdvisor", 0, this);
+        Pieces[9][4] = new King("King_Red", 0, this);
+        Pieces[9][5] = new Advisor("RAdvisor", 0, this);
+        Pieces[9][6] = new Elephant("RElephant", 0, this);
+        Pieces[9][7] = new Horse("RHorse", 0, this);
+        Pieces[9][8] = new Chariot("RChariot", 0, this);
+        Pieces[7][1] = new Cannon("RCannon", 0, this);
+        Pieces[7][7] = new Cannon("RCannon", 0, this);
+        Pieces[6][0] = new Pawn("RPawn", 0, this);
+        Pieces[6][2] = new Pawn("RPawn", 0, this);
+        Pieces[6][4] = new Pawn("RPawn", 0, this);
+        Pieces[6][6] = new Pawn("RPawn", 0, this);
+        Pieces[6][8] = new Pawn("RPawn", 0, this);
+        
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (Pieces[i][j] != null) {
+                    Pieces[i][j].setY(i);
+                    Pieces[i][j].setX(j);
+                }
+            }
+        }
     }
     
     public void DrawBoard() {
@@ -151,10 +191,10 @@ public final class Board extends JPanel implements MouseListener, ActionListener
     public void CheckLocalKing(String name) {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 9; j++) {
-                //if (Pieces[i][j] instanceof King && Pieces[i][j].getName().equals(name)) {
-              //      king[0] = i;
-               //     king[1] = j;
-              //  }
+                if (Pieces[i][j] instanceof King && Pieces[i][j].getName().equals(name)) {
+                    king[0] = i;
+                    king[1] = j;
+                }
             }
         }
     }
@@ -211,12 +251,18 @@ public final class Board extends JPanel implements MouseListener, ActionListener
         }
         return false;
     }
+    
+    public static void infoBox(String infoMessage, String titleBar) {
+        JOptionPane.showMessageDialog(null, infoMessage, "Warning : " + titleBar, JOptionPane.INFORMATION_MESSAGE);
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
+        
     }
 
     @Override
