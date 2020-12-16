@@ -61,13 +61,11 @@ public final class Board extends JPanel implements MouseListener, ActionListener
     public static ArrayList<Piece> APiece;
     
     public String Base_Source(String name) {
-        return "./" + name + ".gif";
-
+        return "./Image/" + name + ".gif";
     }
 
     public String Base_Sources(String name) {
-        return "./" + name + ".png";
-
+        return "./Image/" + name + ".png";
     }
 
     public Image new_image(String y) {
