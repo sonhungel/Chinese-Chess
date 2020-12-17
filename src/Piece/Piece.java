@@ -74,35 +74,5 @@ public abstract class Piece {
                 return false;
         return true;
     }
-    // Touch Row & Column
-    public int TouchPieceRow(int Row_Current,int Row_Dest,int Column_Current,int Column_Dest)
-    {
-        int index=0;
-        if(Row_Current<Row_Dest){
-            for(int i = Row_Current ; i<Row_Dest ; i++)
-                if(Board.GetPiece(i, Column_Current)!=null)
-                    index++;
-        }
-        else if(Row_Current>=Row_Dest){
-            for(int i = Row_Current ; i>Row_Dest ; i--)
-                if(Board.GetPiece(i, Column_Current)!=null)
-                    index++;      
-        }
-        return index;
-    }
-    public int TouchPieceColumn(int Column_Current,int Column_Dest,int Row_Current,int Row_Dest)
-    {
-        int index=0;
-        if(Column_Current>Column_Dest){
-            for(int i = Column_Current ; i>Column_Dest ; i--)
-                if(Board.GetPiece(Row_Current, i)!=null)
-                    index++;
-        }
-        else if(Column_Current<Column_Dest){
-            for(int i = Column_Current ; i<Column_Dest ; i++)
-                if(Board.GetPiece(Row_Current, i)!=null)
-                    index++;
-        }
-        return index;
-    }
+       
 }
