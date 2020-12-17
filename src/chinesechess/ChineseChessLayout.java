@@ -23,7 +23,6 @@ import javax.swing.JLabel;
 public class ChineseChessLayout extends JFrame implements ActionListener {
     
     private final JButton btnPlay;
-    private JLabel lb;
     
     private JButton createJButton(String title) {
         JButton btn = new JButton(title);
@@ -65,19 +64,13 @@ public class ChineseChessLayout extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-     // change text and background of JLabel when click button
-    private void changeBackgroundJLabel(Color bgcolor, String nameBgcolor) {
-        lb.setBackground(bgcolor);
-        lb.setText("Background is " + nameBgcolor);
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnPlay) {
-            //new Board();
+            new Board();
             System.out.println("Tapped button START");
         }
-        //this.dispose();
+        this.dispose();
     }
     
     public static void main(String[] args) {

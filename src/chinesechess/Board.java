@@ -21,36 +21,35 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-import org.w3c.dom.css.Counter;
 import javax.swing.JOptionPane;
 
 public final class Board extends JPanel implements MouseListener, ActionListener {
-    
+
     JFrame board = new JFrame("Chinese Chess");
-    
+
     public int Counter = 0;
     public int timeCounter = 12;
     public int secondpass = 0;
     public int Row;
     public int turn = 1;
     public int Column;
-    
+
     JButton btnNewGame;
     JButton btnBackMenu;
     JButton btnSurrender;
-    
+
     public Piece Active_Piece = null;
     public Piece Click = null;
-    public int[] king = {0, 0};
+    // Lưu vị trí của King
+    public int[] king = { 0, 0 };
     public boolean flag = false;
     // Setup Position for KING
-    public int[] kingRed = {9, 4};  
-    public int[] kingGreen = {0, 4};
+    public int[] kingRed = { 9, 4 };
+    public int[] kingGreen = { 0, 4 };
     public static Piece[][] Pieces = new Piece[10][9];
-    
+
     public String Base_Source(String name) {
         return "./Image/" + name + ".gif";
     }
@@ -63,7 +62,7 @@ public final class Board extends JPanel implements MouseListener, ActionListener
         Image img = Toolkit.getDefaultToolkit().getImage(Base_Sources(y));
         return img;
     }
-    
+
     public void paint(Graphics g) {
         super.paint(g);
         Image img1 = Toolkit.getDefaultToolkit().getImage(Base_Source("board"));
@@ -97,7 +96,7 @@ public final class Board extends JPanel implements MouseListener, ActionListener
     }
 
     // Initialize for all Chess Pieces
-    public void init(){
+    public void init() {
         Counter = 0;
         turn = 1;
         for (int i = 0; i < 10; i++) {
@@ -121,7 +120,7 @@ public final class Board extends JPanel implements MouseListener, ActionListener
         Pieces[3][4] = new Pawn("GPawn", 1, this);
         Pieces[3][6] = new Pawn("GPawn", 1, this);
         Pieces[3][8] = new Pawn("GPawn", 1, this);
-        
+
         Pieces[9][0] = new Chariot("RChariot", 0, this);
         Pieces[9][1] = new Horse("RHorse", 0, this);
         Pieces[9][2] = new Elephant("RElephant", 0, this);
@@ -138,7 +137,7 @@ public final class Board extends JPanel implements MouseListener, ActionListener
         Pieces[6][4] = new Pawn("RPawn", 0, this);
         Pieces[6][6] = new Pawn("RPawn", 0, this);
         Pieces[6][8] = new Pawn("RPawn", 0, this);
-        
+
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 9; j++) {
                 if (Pieces[i][j] != null) {
@@ -148,7 +147,7 @@ public final class Board extends JPanel implements MouseListener, ActionListener
             }
         }
     }
-    
+
     public void DrawBoard() {
         btnNewGame = new JButton("New Game");
         btnNewGame.setBackground(Color.green);
@@ -171,15 +170,15 @@ public final class Board extends JPanel implements MouseListener, ActionListener
         board.setLocationRelativeTo(null);
         this.repaint();
     }
-    
+
     public Piece GetPiece(int Row, int Column) {
         if (Pieces[Row][Column] != null) {
             return Pieces[Row][Column];
         }
         return null;
     }
-    
-    public Board(){
+
+    public Board() {
         init();
         DrawBoard();
         board.addMouseListener(this);
@@ -187,7 +186,7 @@ public final class Board extends JPanel implements MouseListener, ActionListener
         board.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         board.setVisible(true);
     }
-    
+
     public void CheckLocalKing(String name) {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 9; j++) {
@@ -198,7 +197,7 @@ public final class Board extends JPanel implements MouseListener, ActionListener
             }
         }
     }
-    
+
     public boolean checkTwoKing() {
         CheckLocalKing("King_Red");
         int rowRed = king[0], columnRed = king[1];
@@ -217,7 +216,7 @@ public final class Board extends JPanel implements MouseListener, ActionListener
         return false;
     }
 
-    public boolean CheckMateRed(){
+    public boolean CheckMateRed() {
         CheckLocalKing("King_Red");
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 9; j++) {
@@ -234,8 +233,8 @@ public final class Board extends JPanel implements MouseListener, ActionListener
 
         return false;
     }
-    
-    public boolean CheckMateBlack(){
+
+    public boolean CheckMateBlack() {
         CheckLocalKing("King_Green");
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 9; j++) {
@@ -251,7 +250,7 @@ public final class Board extends JPanel implements MouseListener, ActionListener
         }
         return false;
     }
-    
+
     public static void infoBox(String infoMessage, String titleBar) {
         JOptionPane.showMessageDialog(null, infoMessage, "Warning : " + titleBar, JOptionPane.INFORMATION_MESSAGE);
     }
@@ -262,7 +261,89 @@ public final class Board extends JPanel implements MouseListener, ActionListener
 
     @Override
     public void mousePressed(MouseEvent e) {
-        
+        Row = (int) ((e.getY() - 25 - 60) / 60.0 - 0.5);
+        Column = (int) ((e.getX() - 25) / 60.0);
+        int color = 0;
+        if (Counter % 2 == 1) {
+            color = 1;
+        }
+        if (Row >= 0 && Row <= 9 && Column >= 0 && Column <= 8) {
+            if (Active_Piece == null && Pieces[Row][Column] != null && color == Pieces[Row][Column].getColor()) {
+                Active_Piece = Pieces[Row][Column];
+                flag = true;
+            } else if (Active_Piece != null && color == Active_Piece.getColor()
+                    && Active_Piece.Move(Row, Column) == true) {
+                if (Counter % 2 == 1) {
+                    color = 1;
+                    turn = 1;
+                } else {
+                    turn = 0;
+                }
+                int Current_X = Active_Piece.getX();
+                int Current_Y = Active_Piece.getY();
+                Piece pieceXoa = Pieces[Row][Column];
+                Piece pieceDiChuyen = Pieces[Current_Y][Current_X];
+                if (Pieces[Row][Column] != null) {
+                    Pieces[Row][Column] = null;
+                }
+                Active_Piece.setX(Column);
+                Active_Piece.setY(Row);
+                Pieces[Row][Column] = Active_Piece;
+
+                Pieces[Current_Y][Current_X] = null;
+                Active_Piece = null;
+                Counter++;
+                flag = false;
+                if ("King_Red".equals(Pieces[Row][Column].getName())) {
+                    kingRed[0] = Row;
+                    kingRed[1] = Column;
+                }
+                if ("King_Green".equals(Pieces[Row][Column].getName())) {
+                    kingGreen[0] = Row;
+                    kingGreen[1] = Column;
+                }
+              
+                if (Pieces[Row][Column] != null && Pieces[Row][Column].getColor() == 0) {
+                    if (CheckMateRed()) {
+                        pieceDiChuyen.setY(Current_Y);
+                        pieceDiChuyen.setX(Current_X);
+                        Pieces[Current_Y][Current_X] = pieceDiChuyen;
+                        Pieces[Row][Column] = pieceXoa;
+                        Active_Piece = null;
+                        Counter = 0;
+                        turn = 1;
+                    }
+                }
+                if (Pieces[Row][Column] != null && Pieces[Row][Column].getColor() == 1) {
+                    if (CheckMateBlack()) {
+                        pieceDiChuyen.setY(Current_Y);
+                        pieceDiChuyen.setX(Current_X);
+                        Pieces[Current_Y][Current_X] = pieceDiChuyen;
+                        Pieces[Row][Column] = pieceXoa;
+                        Active_Piece = null;
+                        Counter = 1;
+                        turn = 0;
+                    }
+                }
+            } else {
+                Active_Piece = null;
+                flag = false;
+            }
+            repaint();
+            
+            if (Pieces[Row][Column].getColor() == 1) {
+                if (CheckMateRed()) {
+                    System.out.println("Chieu tuong do");
+                    infoBox("Checkmate Red", "CHECKMATE");
+                }
+            }
+            if (Pieces[Row][Column].getColor() == 0) {
+                if (CheckMateBlack()) {
+                    System.out.println("Chieu tuong den");
+                    infoBox("Checkmate Black", "CHECKMATE");
+                }
+            }
+        }
     }
 
     @Override
@@ -281,24 +362,23 @@ public final class Board extends JPanel implements MouseListener, ActionListener
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnSurrender) {
             if (turn == 1) {
-
                 JFrame panel = new JFrame();
                 panel.setLayout(new GridBagLayout());
                 JLabel label = new JLabel(" Red Lose");
-                label.setBackground(Color.yellow);
-                label.setForeground(Color.red);
+                label.setBackground(Color.black);
+                //label.setForeground(Color.red);
                 System.out.printf("Red Lose");
                 panel.add(label);
 
                 panel.setSize(100, 100);
                 panel.setLocationRelativeTo(null);
                 panel.setVisible(true);
-            }
-            if (turn == 0) {
+            } else if (turn == 0) {
                 JFrame panel = new JFrame();
                 panel.setLayout(new GridBagLayout());
                 JLabel label = new JLabel(" Green Lose");
-                label.setForeground(Color.green);
+                label.setForeground(Color.black);
+                //label.setForeground(Color.green);
                 panel.setSize(100, 100);
                 panel.setLocationRelativeTo(null);
                 panel.setVisible(true);
@@ -310,7 +390,6 @@ public final class Board extends JPanel implements MouseListener, ActionListener
         if (e.getSource() == btnNewGame) {
             board.dispose();
             new Board();
-            //repaint();    
         }
         if (e.getSource() == btnBackMenu) {
             board.dispose();
