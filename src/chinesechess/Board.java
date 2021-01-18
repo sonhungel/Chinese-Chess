@@ -104,39 +104,39 @@ public final class Board extends JPanel implements MouseListener, ActionListener
                 Pieces[i][j] = null;
             }
         }
-        Pieces[0][0] = new Chariot("GChariot", 1, this);
-        Pieces[0][1] = new Horse("GHorse", 1, this);
-        Pieces[0][2] = new Elephant("GElephant", 1, this);
-        Pieces[0][3] = new Advisor("GAdvisor", 1, this);
-        Pieces[0][4] = new King("King_Green", 1, this);
-        Pieces[0][5] = new Advisor("GAdvisor", 1, this);
-        Pieces[0][6] = new Elephant("GElephant", 1, this);
-        Pieces[0][7] = new Horse("GHorse", 1, this);
-        Pieces[0][8] = new Chariot("GChariot", 1, this);
-        Pieces[2][1] = new Cannon("GCannon", 1, this);
-        Pieces[2][7] = new Cannon("GCannon", 1, this);
-        Pieces[3][0] = new Pawn("GPawn", 1, this);
-        Pieces[3][2] = new Pawn("GPawn", 1, this);
-        Pieces[3][4] = new Pawn("GPawn", 1, this);
-        Pieces[3][6] = new Pawn("GPawn", 1, this);
-        Pieces[3][8] = new Pawn("GPawn", 1, this);
+        Pieces[0][0] = PieceFactory.getPiece(PieceType.CHARIOT, PlayerType.GREEN,this);//new Chariot("GChariot", 1, this);
+        Pieces[0][1] = PieceFactory.getPiece(PieceType.HORSE, PlayerType.GREEN,this);//new Horse("GHorse", 1, this);
+        Pieces[0][2] = PieceFactory.getPiece(PieceType.ELEPHANT, PlayerType.GREEN,this);//new Elephant("GElephant", 1, this);
+        Pieces[0][3] = PieceFactory.getPiece(PieceType.ADVISOR, PlayerType.GREEN,this);//new Advisor("GAdvisor", 1, this);
+        Pieces[0][4] = PieceFactory.getPiece(PieceType.KING, PlayerType.GREEN,this);//new King("King_Green", 1, this);
+        Pieces[0][5] = PieceFactory.getPiece(PieceType.ADVISOR, PlayerType.GREEN,this);//new Advisor("GAdvisor", 1, this);
+        Pieces[0][6] = PieceFactory.getPiece(PieceType.ELEPHANT, PlayerType.GREEN,this);//new Elephant("GElephant", 1, this);
+        Pieces[0][7] = PieceFactory.getPiece(PieceType.HORSE, PlayerType.GREEN,this);//new Horse("GHorse", 1, this);
+        Pieces[0][8] = PieceFactory.getPiece(PieceType.CHARIOT, PlayerType.GREEN,this);//new Chariot("GChariot", 1, this);
+        Pieces[2][1] = PieceFactory.getPiece(PieceType.CANNON, PlayerType.GREEN,this);//new Cannon("GCannon", 1, this);
+        Pieces[2][7] = PieceFactory.getPiece(PieceType.CANNON, PlayerType.GREEN,this);//new Cannon("GCannon", 1, this);
+        Pieces[3][0] = PieceFactory.getPiece(PieceType.PAWN, PlayerType.GREEN,this);//new Pawn("GPawn", 1, this);
+        Pieces[3][2] = PieceFactory.getPiece(PieceType.PAWN, PlayerType.GREEN,this);//new Pawn("GPawn", 1, this);
+        Pieces[3][4] = PieceFactory.getPiece(PieceType.PAWN, PlayerType.GREEN,this);//new Pawn("GPawn", 1, this);
+        Pieces[3][6] = PieceFactory.getPiece(PieceType.PAWN, PlayerType.GREEN,this);//new Pawn("GPawn", 1, this);
+        Pieces[3][8] = PieceFactory.getPiece(PieceType.PAWN, PlayerType.GREEN,this);//new Pawn("GPawn", 1, this);
 
-        Pieces[9][0] = new Chariot("RChariot", 0, this);
-        Pieces[9][1] = new Horse("RHorse", 0, this);
-        Pieces[9][2] = new Elephant("RElephant", 0, this);
-        Pieces[9][3] = new Advisor("RAdvisor", 0, this);
-        Pieces[9][4] = new King("King_Red", 0, this);
-        Pieces[9][5] = new Advisor("RAdvisor", 0, this);
-        Pieces[9][6] = new Elephant("RElephant", 0, this);
-        Pieces[9][7] = new Horse("RHorse", 0, this);
-        Pieces[9][8] = new Chariot("RChariot", 0, this);
-        Pieces[7][1] = new Cannon("RCannon", 0, this);
-        Pieces[7][7] = new Cannon("RCannon", 0, this);
-        Pieces[6][0] = new Pawn("RPawn", 0, this);
-        Pieces[6][2] = new Pawn("RPawn", 0, this);
-        Pieces[6][4] = new Pawn("RPawn", 0, this);
-        Pieces[6][6] = new Pawn("RPawn", 0, this);
-        Pieces[6][8] = new Pawn("RPawn", 0, this);
+        Pieces[9][0] = PieceFactory.getPiece(PieceType.CHARIOT, PlayerType.RED,this);//new Chariot("RChariot", 0, this);
+        Pieces[9][1] = PieceFactory.getPiece(PieceType.HORSE, PlayerType.RED,this);//new Horse("RHorse", 0, this);
+        Pieces[9][2] = PieceFactory.getPiece(PieceType.ELEPHANT, PlayerType.RED,this);//new Elephant("RElephant", 0, this);
+        Pieces[9][3] = PieceFactory.getPiece(PieceType.ADVISOR, PlayerType.RED,this);//new Advisor("RAdvisor", 0, this);
+        Pieces[9][4] = PieceFactory.getPiece(PieceType.KING, PlayerType.RED,this);//new King("King_Red", 0, this);
+        Pieces[9][5] = PieceFactory.getPiece(PieceType.ADVISOR, PlayerType.RED,this);//new Advisor("RAdvisor", 0, this);
+        Pieces[9][6] = PieceFactory.getPiece(PieceType.ELEPHANT, PlayerType.RED,this);//new Elephant("RElephant", 0, this);
+        Pieces[9][7] = PieceFactory.getPiece(PieceType.HORSE, PlayerType.RED,this);//new Horse("RHorse", 0, this);
+        Pieces[9][8] = PieceFactory.getPiece(PieceType.CHARIOT, PlayerType.RED,this);//new Chariot("RChariot", 0, this);
+        Pieces[7][1] = PieceFactory.getPiece(PieceType.CANNON, PlayerType.RED,this);//new Cannon("RCannon", 0, this);
+        Pieces[7][7] = PieceFactory.getPiece(PieceType.CANNON, PlayerType.RED,this);//new Cannon("RCannon", 0, this);
+        Pieces[6][0] = PieceFactory.getPiece(PieceType.PAWN, PlayerType.RED,this);//new Pawn("RPawn", 0, this);
+        Pieces[6][2] = PieceFactory.getPiece(PieceType.PAWN, PlayerType.RED,this);//new Pawn("RPawn", 0, this);
+        Pieces[6][4] = PieceFactory.getPiece(PieceType.PAWN, PlayerType.RED,this);//new Pawn("RPawn", 0, this);
+        Pieces[6][6] = PieceFactory.getPiece(PieceType.PAWN, PlayerType.RED,this);//new Pawn("RPawn", 0, this);
+        Pieces[6][8] = PieceFactory.getPiece(PieceType.PAWN, PlayerType.RED,this);//new Pawn("RPawn", 0, this);
 
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 9; j++) {
@@ -340,7 +340,7 @@ public final class Board extends JPanel implements MouseListener, ActionListener
             if (Pieces[Row][Column].getColor() == 0) {
                 if (CheckMateBlack()) {
                     System.out.println("Chieu tuong den");
-                    infoBox("Checkmate Black", "CHECKMATE");
+                    infoBox("Checkmate Green", "CHECKMATE");
                 }
             }
         }
