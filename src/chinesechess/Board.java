@@ -261,6 +261,7 @@ public final class Board extends JPanel implements MouseListener, ActionListener
 
     @Override
     public void mousePressed(MouseEvent e) {
+        // xác định vị trí con trỏ
         Row = (int) ((e.getY() - 25 - 60) / 60.0 - 0.5);
         Column = (int) ((e.getX() - 25) / 60.0);
         int color = 0;
