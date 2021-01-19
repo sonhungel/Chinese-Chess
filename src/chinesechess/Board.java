@@ -29,27 +29,27 @@ public final class Board extends JPanel implements MouseListener, ActionListener
 
     JFrame board = new JFrame("Chinese Chess");
 
-    public int Counter = 0;
-    public int timeCounter = 12;
-    public int secondpass = 0;
-    public int Row;
-    public int turn = 1;
-    public int Column;
+    private int Counter = 0;
+    //private int timeCounter = 12;
+    //private int secondpass = 0;
+    private int Row;
+    private int turn = 1;
+    private int Column;
 
     JButton btnNewGame;
     JButton btnBackMenu;
     JButton btnSurrender;
 
-    public Piece Active_Piece = null;
-    public Piece Click = null;
+    private Piece Active_Piece = null;
+    //private Piece Click = null;
     // Lưu vị trí của King
-    public int[] king = { 0, 0 };
+    private int[] king = { 0, 0 };
     // cờ kiểm tra ký hiệu quân đc chọn
     public boolean flag = false;
     // Setup Position for KING
-    public int[] kingRed = { 9, 4 };
-    public int[] kingGreen = { 0, 4 };
-    public static Piece[][] Pieces = new Piece[10][9];
+    private int[] kingRed = { 9, 4 };
+    private int[] kingGreen = { 0, 4 };
+    private static Piece[][] Pieces = new Piece[10][9];
 
     public String Base_Source(String name) {
         return "./Image/" + name + ".gif";
