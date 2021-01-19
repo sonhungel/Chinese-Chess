@@ -44,6 +44,7 @@ public final class Board extends JPanel implements MouseListener, ActionListener
     public Piece Click = null;
     // Lưu vị trí của King
     public int[] king = { 0, 0 };
+    // cờ kiểm tra ký hiệu quân đc chọn
     public boolean flag = false;
     // Setup Position for KING
     public int[] kingRed = { 9, 4 };
