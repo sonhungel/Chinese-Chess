@@ -369,7 +369,7 @@ public final class Board extends JPanel implements MouseListener, ActionListener
                 label.setBackground(Color.black);
                 //label.setForeground(Color.red);
                 System.out.printf("Red Lose");
-                panel.add(label);
+                panel.add(label); 
 
                 panel.setSize(100, 100);
                 panel.setLocationRelativeTo(null);
